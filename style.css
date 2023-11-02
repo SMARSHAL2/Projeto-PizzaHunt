@@ -182,5 +182,9 @@ section.images .circle {
     main form label span, main form input[type="submit"] {
         font-size: 1rem;
     }
+
+    main form input {
+        width: 250px;
+    }
 }
 
