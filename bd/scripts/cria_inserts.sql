@@ -17,17 +17,17 @@ INSERT INTO empresa (cnpj, nome_empresa, endereco, telefone_empresa, email_empre
 ('12345678000123', 'Pizza Hunt', 'Rua da Liberdade, 123, São Miguel', '(11) 1234-5678', 'contato@pizzahunt.com');
 
 
-INSERT INTO funcionario (nome_funcionario, cargo, salario, empresa_cnpj, sexo_funcionario) VALUES
+INSERT INTO funcionario (nome_funcionario, cargo, salario, sexo_funcionario, cpf, telefone) VALUES
 
-('João Silva', 'Pizzaiolo', 2500.00, '12345678000123', 'M'),
+('João Silva', 'Pizzaiolo', 2500.00, 'M', '12345678901', '49981234567'),
 
-('Maria Oliveira', 'Atendente', 2000.00, '12345678000123', 'F'),
+('Maria Oliveira', 'Atendente', 2000.00, 'F', '23456789012', '49987654321'),
 
-('Pedro Costa', 'Gerente', 3500.00, '12345678000123', 'M'),
+('Pedro Costa', 'Gerente', 3500.00, 'M', '34567890123', '49989876543'),
 
-('Ana Santos', 'Garçonete', 2200.00, '12345678000123', 'F'),
+('Ana Santos', 'Garçonete', 2200.00, 'F', '45678901234', '49981231234'),
 
-('Carlos Souza', 'Entregador', 1800.00, '12345678000123', 'M');
+('Carlos Souza', 'Entregador', 1800.00, 'M', '56789012345', '49982345678');
 
 -- Inserindo pedidos sem feedback
 INSERT INTO pedidos (data_hora_pedido, status_pedido, id_cliente, id_funcionario) VALUES
@@ -95,3 +95,7 @@ INSERT INTO feedback (comentario, avaliacao) VALUES
 ('Gostei muito, recomendo!', 4.0),
 
 ('Entregador muito simpático.', 4.8);
+
+UPDATE Produto
+SET descricao_produto = 'Bebida'
+WHERE nome_produto = 'Refrigerante Coca Cola';

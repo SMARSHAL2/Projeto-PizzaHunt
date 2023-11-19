@@ -216,3 +216,13 @@ COMMENT ON TABLE feedback IS 'tabela do feedback dos pedidos';
 COMMENT ON COLUMN feedback.id_feedback IS 'id do feedback';
 COMMENT ON COLUMN feedback.comentario IS 'comentário do pedido';
 COMMENT ON COLUMN feedback.avaliacao IS 'avaliação do pedido';
+
+
+ALTER TABLE funcionario
+ADD COLUMN cpf VARCHAR(11),
+ADD COLUMN telefone VARCHAR(15);
+
+ALTER TABLE funcionario
+DROP COLUMN empresa_cnpj;
+
+
