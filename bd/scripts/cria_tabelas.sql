@@ -217,7 +217,6 @@ COMMENT ON COLUMN feedback.id_feedback IS 'id do feedback';
 COMMENT ON COLUMN feedback.comentario IS 'comentário do pedido';
 COMMENT ON COLUMN feedback.avaliacao IS 'avaliação do pedido';
 
-
 ALTER TABLE funcionario
 ADD COLUMN cpf VARCHAR(11),
 ADD COLUMN telefone VARCHAR(15);
