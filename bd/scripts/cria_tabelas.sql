@@ -222,9 +222,6 @@ ALTER TABLE funcionario
 ADD COLUMN cpf VARCHAR(11),
 ADD COLUMN telefone VARCHAR(15);
 
-ALTER TABLE clientes 
-ADD COLUMN senha VARCHAR(20); 
-
 ALTER TABLE funcionario
 DROP COLUMN empresa_cnpj;
 
