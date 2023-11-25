@@ -1,6 +1,7 @@
 package project.unoesc.springboot.pizzaHunt.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,4 +47,18 @@ public class ClienteController {
 		List<Cliente> usuario = clienteRepository.buscarPorNome(nome.trim().toUpperCase());
 		return new ResponseEntity<List<Cliente>>(usuario, HttpStatus.OK);
 	}
+    
+    @GetMapping(value = "/buscaruserid")
+    @ResponseBody
+    public ResponseEntity<?> buscarClientePorId(@RequestParam(name = "iduser") Long idCliente) {
+        Optional<Cliente> cliente = clienteRepository.findById(idCliente);
+
+        if (cliente.isPresent()) {
+            return new ResponseEntity<>(cliente.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Cliente não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 }

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-	<h3>Spring teste...</h3>
+	<h3>Cadastro de Clientes</h3>
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -65,12 +65,15 @@
 						</div>
 						<button type="button" class="btn btn-success" onclick="pesquisarUsuario()">Buscar</button>
 					</form>
-					<div style="height:300px; overflow:auto;">
+					<div style="height: 300px; overflow-y: auto; display: flex;">
 						<table class="table table-striped" id="tabelaresultados">
 							<thead>
 								<tr>
 									<th scope="col">ID</th>
 									<th scope="col">Nome</th>
+									<th scope="col">Email</th>
+									<th scope="col">Telefone</th>
+									<th scope="col">Endereço</th>
 									<th scope="col">Editar</th>
 									<th scope="col">Excluir</th>
 								</tr>
@@ -108,7 +111,6 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
                     alert("Salvo com sucesso!");
-                    // Você pode adicionar mais lógica aqui se necessário
                 }
             }).fail(function (xhr, status, errorThrown) {
                 alert("Erro ao salvar: " + xhr.responseText);
@@ -127,11 +129,19 @@
 						function (response) {
 							$("#tabelaresultados > tbody > tr").remove();
 							for (var i = 0; i < response.length; i++) {
-								$('#tabelaresultados > tbody').append('<tr id="' + response[i].id + '"><td>' +
-									response[i].id + '</td><td>' +
-									response[i].nome + '</td><td> <button type="button" onclick="colocarEmEdicao(' +
-									response[i].id + ')"class="btn btn-primary">+</button></td> <td><button type="button"class= "btn btn-danger" onclick = "excluirUsuario(' + response[i].id + ')" > x</button ></td ></tr > ')
+							    $('#tabelaresultados > tbody').append(
+							        '<tr id="' + response[i].id + '">' +
+							        '<td>' + response[i].id + '</td>' +
+							        '<td>' + response[i].nome + '</td>' +
+							        '<td>' + response[i].email + '</td>' + 
+							        '<td>' + response[i].telefone + '</td>' + 
+							        '<td>' + response[i].endereco + '</td>' + 
+							        '<td><button type="button" onclick="colocarEmEdicao(' + response[i].id + ')" class="btn btn-primary">+</button></td>' +
+							        '<td><button type="button" class="btn btn-danger" onclick="excluirUsuario(' + response[i].id + ')">x</button></td>' +
+							        '</tr>'
+							    );
 							}
+
 						}
 				}).fail(function (xhr, status, errorThrown) {
 					alert("Erro ao buscar usuário: " + xhr.responseText);
@@ -140,36 +150,40 @@
 		}
 
 		function colocarEmEdicao(id) {
-			$.ajax({
-				method: "GET",
-				url: "buscaruserid",
-				data: "iduser=" + id,
-				success: function (response) {
-					$("#id").val(response.id);
-					$("#nome").val(response.nome);
-					$("#idade").val(response.idade);
-					$('#modalPesquisarUser').modal('hide');
-				}
-			}).fail(function (xhr, status, errorThrown) {
-				alert("Erro ao buscar usuario por ID: " + xhr.responseText);
-			});
+		    $.ajax({
+		        method: "GET",
+		        url: "/clientes/buscaruserid",
+		        data: { iduser: id },
+		        success: function (response) {
+		            $("#id").val(response.id); 
+		            $("#nome").val(response.nome);
+		            $("#endereco").val(response.endereco); 
+		            $("#telefone").val(response.telefone); 
+		            $("#email").val(response.email); 
+		            $('#modalPesquisarUser').modal('hide'); 
+		        }
+		    }).fail(function (xhr, status, errorThrown) {
+		        alert("Erro ao buscar usuario por ID: " + xhr.responseText);
+		    });
 		}
 
+
 		function excluirUsuario(id) {
-			if (confirm('Deseja realmente excluir?')) {
-				$.ajax({
-					method: "DELETE",
-					url: "delete",
-					data: "iduser=" + id,
-					success: function (response) {
-						$('#' + id).remove();
-						alert(response);
-					}
-				}).fail(function (xhr, status, errorThrown) {
-					alert("Erro ao deletar usuario por id: " + xhr.responseText);
-				});
-			}
+		    if (confirm('Deseja realmente excluir?')) {
+		        $.ajax({
+		            method: "DELETE",
+		            url: "/clientes/deletar?idCliente=" + id,
+		            success: function (response) {
+		                $('#' + id).remove();
+		                alert(response);
+		            },
+		            error: function (xhr) {
+		                alert("Erro ao deletar usuario por id: " + xhr.responseText);
+		            }
+		        });
+		    }
 		}
+
 
 		function excluirUsuarioBotao() {
 			var id = $('#id').val();
