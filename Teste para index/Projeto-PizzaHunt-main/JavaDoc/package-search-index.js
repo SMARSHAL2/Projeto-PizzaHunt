@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"project.unoesc.springboot.pizzaHunt"},{"l":"project.unoesc.springboot.pizzaHunt.controllers"},{"l":"project.unoesc.springboot.pizzaHunt.model"},{"l":"project.unoesc.springboot.pizzaHunt.repository"}];updateSearchResults();

@@ -1,1 +1,0 @@
-CREATE DATABASE pizza_hunt;
