@@ -1,7 +1,7 @@
 # PizzaHunt
 
 # Autores: Geslon Gisch, Jalisson Ternus, Lucas da Rosa, Thiago Thomas
-# Descrição: Projeto de Banco de Dados de uma Pizzaria.
+# Descrição: Projeto de uma Pizzaria.
 
 # Diciplinas: Engenharia de Software, Programação 2 e Banco de Dados 2 
 
