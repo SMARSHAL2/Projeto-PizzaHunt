@@ -37,3 +37,27 @@ SELECT EXTRACT(MONTH FROM data_hora_pedido) AS mes,
 FROM Pedidos2023
 GROUP BY EXTRACT(MONTH FROM data_hora_pedido)
 ORDER BY mes;
+
+--
+CREATE VIEW vw_clientes AS
+SELECT id_cliente, nome, idade, CPF
+FROM clientes;
+
+CREATE VIEW vw_pedidos AS
+SELECT id_pedido, cliente_id, valor_pedido, data_pedido
+FROM pedidos
+WHERE YEAR(data_pedido) = 2023;
+
+CREATE VIEW vw_itens_pedido AS
+SELECT pedido_id, COUNT(*) AS quantidade_itens
+FROM itens_pedido
+GROUP BY pedido_id;
+
+SELECT c.nome, c.idade, c.CPF
+FROM vw_clientes c
+INNER JOIN vw_pedidos p ON c.id_cliente = p.cliente_id
+INNER JOIN vw_itens_pedido ip ON p.id_pedido = ip.pedido_id
+WHERE c.idade BETWEEN 16 AND 28
+  AND p.valor_pedido > 120.00
+  AND ip.quantidade_itens > 0;
+
